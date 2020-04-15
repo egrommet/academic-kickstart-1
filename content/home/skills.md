@@ -17,19 +17,37 @@ subtitle = ""
 [[feature]]
   icon = "r-project"
   icon_pack = "fab"
-  name = "R"
-  description = "90%"
-  
+  name = "R Programming"
+  description = ""
+
 [[feature]]
   icon = "chart-line"
   icon_pack = "fas"
-  name = "Statistics"
-  description = "100%"  
-  
+  name = "Data Visualisation"
+  description = ""  
+
 [[feature]]
-  icon = "camera-retro"
+  icon = "newspaper"
+  icon_pack = "far"
+  name = "Data Journalism"
+  description = ""
+
+[[feature]]
+  icon = "chalkboard-teacher"
   icon_pack = "fas"
-  name = "Photography"
-  description = "10%"
+  name = "Journalism Education"
+  description = ""  
+
+[[feature]]
+  icon = "book-reader"
+  icon_pack = "fas"
+  name = "Author"
+  description = ""
+
+[[feature]]
+  icon = "bullhorn"
+  icon_pack = "fas"
+  name = "Commentator"
+  description = "" 
 
 +++
