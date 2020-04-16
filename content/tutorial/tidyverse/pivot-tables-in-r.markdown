@@ -1,23 +1,21 @@
 ---
-title: A pivot table in R
-linktitle: First pivot table
+date: "2020-04-15T00:00:00Z"
+draft: false
+linktitle: Pivot tables
+menu:
+  tidyverse:
+    parent: Tidyverse tools
+    weight: 1
+title: Pivot tables
 toc: true
 type: docs
-date: "2019-04-09T00:00:00+01:00"
-draft: false
-menu:
-  example:
-    parent: Tidyverse Tools
-    weight: 1
-
-# Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
 weight: 1
 ---
 
 ## Looking at police data using Tidyverse tools
 The Tidyverse tools are one of my favourite things and made my R coding experience much simpler. Most of the things I'll be posting will use them in one way or another.
 
-We're going to find out what happens when someone reports a stolen bicycle - a friend seems to believe the police do nothing, so let's investigate what actually happens.
+We're going to find out what happens when someone reports a stolen bicycle - a friend seems to believe the police do nothing, so let's investigate what actually happens when a crime is reported.
 
 ### Downloading the data
 I've downloaded a month's worth of data for South Wales Police from [data.police.uk](https://data.police.uk/data/). 

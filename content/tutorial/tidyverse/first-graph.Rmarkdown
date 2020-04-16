@@ -1,16 +1,14 @@
 ---
-title: A simple graph from ggplot2
-linktitle: Your first graph
+date: "2020-04-15T00:00:00Z"
+draft: false
+linktitle: First graph
+menu:
+  tidyverse:
+    parent: Tidyverse tools
+    weight: 2
+title: First graph in ggplot
 toc: true
 type: docs
-date: "2020-04-16T00:00:00+01:00"
-draft: false
-menu:
-  example:
-    parent: Tidyverse Tools
-    weight: 2
-
-# Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
 weight: 2
 ---
 
@@ -19,10 +17,10 @@ We can, of course, download the data set we want and then use tools such as read
 
 This is called an [API (Application Programming Interface)](https://www.freecodecamp.org/news/what-is-an-api-in-english-please-b880a3214a82/), and there are lots of them about. So, a basic understanding of how to get that information into an R dataframe for analysis is really important. 
 
-And just for an added bonus, we're going to build on the concepts from the [pivot table session]({{< ref "/tutorial/datajouRnalism/pivot-tables-in-r.markdown" >}}) to add in a graph using ggplot2 (again a tidyverse tool).
+And just for an added bonus, we're going to build on the concepts from the [pivot table session]({{< ref "/tutorial/tidyverse/pivot-tables-in-r.markdown" >}}) to add in a graph using ggplot2 (again a tidyverse tool).
 
 
-## Tools for the job
+### Tools for the job
 We'll be using httr to work with our APIs - it makes it much easier to construct a question. I've tried using the paste() function to do this in the past and didn't find it easy, httr is much nicer in comparison.
 
 The response from our questions is often in the form of either [JSON or XML](https://www.w3schools.com/js/js_json_xml.asp). The documentation for the API will tell you about what form it is in and that will tell us what tools we need to deal with the particular formats.
@@ -34,7 +32,7 @@ The final package is the tidyverse to allow us to do some data changes, in a sim
 So, usual rules create an R script file in RStudio and we can get working.
 
 
-```{r include=FALSE}
+```{r message=FALSE}
 library(httr)
 library(jsonlite)
 library(tidyverse)
@@ -47,7 +45,7 @@ The [documentation for the data.police site's API](https://data.police.uk/docs/)
 I've had a look at the webpage and inspired by what I've seen in the news recently, I'm going to look at car crime around the main hospital in Cardiff. You could swap any category in this.
 
 ### Building our query web address
-We'll be looking at [street level crimes](https://data.police.uk/docs/method/crime-street/), the way the call is built is in three parts.
+We'll be looking at [street level crimes](https://data.police.uk/docs/method/crime-street/), this call is built is in three parts:
 
 * The basic structure `https://data.police.uk/api/crimes-street/`
 * The crime type `vehicle-crime`
@@ -63,7 +61,7 @@ We'll wrap the web address in double quotes and use the `<-` assign symbol.
 url <- "https://data.police.uk/api/crimes-street/vehicle-crime?"
 ```
 
-We'll now start structuring our request to the data.police server. We'll be using `GET()` from httr - it does what it says. We'll tell it what the url is that we are using and then give it a list() with our query elements inside it. Have a play with the dates and see what is going on - you may get error messages. If so, Google them and find out what they mean.
+We'll now start structuring our request to the data.police server. We'll be using `GET()` from httr - it does what it says. We'll tell it what the url is that we are using and then give it a `list()` with our query elements inside it. Have a play with the dates and see what is going on - you may get error messages. If so, Google them and find out what they mean.
 
 An important point in checking your code is watching out for how many brackets you have. This is a real source of broken code for beginners, so watch out for it. This section below has two opening brackets - one for `GET` and one for `list`, so we must have matching closing brackets. If it isn't matched the code will not run.
 
@@ -87,13 +85,13 @@ We've got a 200 - all is well.
 api_call$status_code
 ```
 
-The way JSON is structured means there is a header with lots of background information (metadata) and content - which is what we want. We'll use jsonlite's content() function and specify how we want it back.
+The way JSON is structured means there is a header with lots of background information (metadata) and content - which is what we want. We'll use jsonlite's `content()` function and specify how we want it back.
 
 ```{r}
 response <- content(api_call, as = "text", encoding = "UTF-8")
 ```
 
-I wouldn't normally use `head()` to look at the top of this kind of object but, let's do it here to see what we get back. You can call `head()` on many types of data object in R to see what you've got at the head (top) of it. You can even tell it how many to look at by adding an n = * argument eg h`ead(object, n = 6)`.
+I wouldn't normally use `head()` to look at the top of this kind of object but, let's do it here to see what we get back. You can call `head()` on many types of data object in R to see what you've got at the head (top) of it. You can even tell it how many to look at by adding an n = * argument eg `head(object, n = 6)`.
 
 ```{r}
 head(response)
@@ -137,9 +135,9 @@ outcomes <- vehicle_crimes %>%
 ```
 
 ### A really simple chart
-One of the tools I use a lot, and get all of my students to use, is the [FT's Visual Vocabulary](https://ft-interactive.github.io/visual-vocabulary/) which was designed to help the FT's team pick the right kind of tool for the job.
+One of the tools I use a lot, and get all of my students to use, is the [FT's Visual Vocabulary](https://ft-interactive.github.io/visual-vocabulary/) which was designed to help the FT's team pick the right kind of tool for the job. I'll be posting more about data visualisation soon.
 
-I'm going to go for a really simple column chart, using ggplot2. `ggplot()` has a `+` symbol which is like the pipe from dplyr and means *AND THEN*. So, we tell `ggplot()` what dataframe to work on, and what data to work on (`aes()`) and then what type of chart to work with. 
+I'm going to build a really simple column chart, using ggplot2. `ggplot()` has a `+` symbol which is like the pipe from dplyr and means *AND THEN*. So, we tell `ggplot()` what dataframe to work on, and what data to work on for the axes (`aes()`) and then what type of chart to work with. 
 
 ```{r}
 ggplot(outcomes, aes(x = outcome, y = outcome_count)) +
