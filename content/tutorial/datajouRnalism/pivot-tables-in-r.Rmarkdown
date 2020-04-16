@@ -1,35 +1,38 @@
 ---
-title: Pivot tables in R - looking at police data
-author: Glyn Mottershead
-date: '2019-04-09'
-slug: pivot-tables-in-r-looking-at-police-data
-categories:
-  - R
-tags:
-  - Police
-image:
-  caption: ''
-  focal_point: ''
+title: A pivot table in R
+linktitle: First pivot table
+toc: true
+type: docs
+date: "2019-04-09T00:00:00+01:00"
+draft: false
+menu:
+  example:
+    parent: Tidyverse Tools
+    weight: 1
+
+# Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
+weight: 1
 ---
-# Looking at police data using Tidyverse tools
+
+## Looking at police data using Tidyverse tools
 The Tidyverse tools are one of my favourite things and made my R coding experience much simpler. Most of the things I'll be posting will use them in one way or another.
 
 We're going to find out what happens when someone reports a stolen bicycle - a friend seems to believe the police do nothing, so let's investigate what actually happens.
 
-## Downloading the data
+### Downloading the data
 I've downloaded a month's worth of data for South Wales Police from [data.police.uk](https://data.police.uk/data/). 
 
 I'm going to do the R equivalent of a pivot table, grouping information together and then analysing it.
 
-## Getting started
+### Getting started
 Open RStudio and go to **FILE > NEW PROJECT** then create it in a new folder. This will give you a chance to choose where you want it to go. I tend to have a project folder and then each individual project is stored inside that.
 
 We'll leave RStudio for a second and head into the computer's file manager to find the folder we just created in RStudio. Inside that I always create a folder called data, I'll then put my downloaded data inside it.
 
-## Create a script
+### Create a script
 Back inside RStudio, I'm going to go to **File menu > New File > R Script**. I'm doing this as it allows me to repeat this analysis when I want to. You'll want to give it a name that makes sense and then save it. R files have a **.R** file extension at the end.
 
-## Installing your first R Package
+### Installing your first R Package
 A package is a tool, or group of tools, that someone has created to cut out some of the repetition in R. We'll be using the tidyverse by Hadley Wickham. These are a set of really helpful data tools that also make R programming easier to read.
 
 We can install packages by going to the **Tools menu > Install Packages** and type the name into the pop-up box.
@@ -57,26 +60,27 @@ It will look like this - `read_csv("file_path")`.
 The full syntax (not the working code I want to use) looks like this:
 `data_frame_name <- read_csv("file_path")`
 
-The **<-** is an assignment symbol, I tend to think of it as a hosepipe which allows the function to pour into the name we give our data frame. 
+The **<-** is an assignment symbol, I tend to think of it as a hosepipe which allows the function to pour into the name we give our data frame (and yes, the analogy continues as I think of the frame name as a bucket for storing things in - so the `<-` allows us to pour data into where it is being stored). 
 
-My file path in the example below says **./** inside the folder we are currently in is a folder called **data** and **/** inside that is a csv file.
+My file path in the example below says **./** inside the folder we are currently in is a folder called **data** and **/** inside that is a named csv file.
 
 ```{r}
 crimes <- read_csv("./data/2019-01-south-wales-street.csv")
 
 ```
+
 The output for this will show us what types of columns we have - in this case `col_character()` means text and `col_double()` means a number format. All good so far.
 
-## Filtering with dplyr
+### Filtering with dplyr
 I want to filter the information so it just includes bicycle thefts. I'm going to use some dplyr package tricks to do this. 
 
 I'm going to store it in a new data frame called **bikes**. We'll be using the crimes data frame we made earlier and then filtering it, before assigning the new information to bikes. So `bikes <- crimes`.
 
-The next bit of the code is `%>%` a pipe - essentially you can say **and then** to yourself when you write it. Our next function is a filter(), it does a similar job to the Excel function. 
+The next bit of the code is `%>%` a pipe - essentially you can say **and then** to yourself when you write it. Our next function is a filter(), it does a similar job to the Excel function of the same name. 
 
 Most functions will need you to say which data frame you are working on and then what you want to do. So we could say `filter(data_frame, column_name == "text we want back")`.
 
-But dplyr knows we are working on the data frame before the first `%>%`. 
+But dplyr knows we are working on the data frame before the first `%>%`, so our code becomes simpler and we just need the column name and the text to grab.[^1]
 
 
 ```{r}
@@ -90,7 +94,7 @@ bikes
 
 The output will show us how many rows (observations) and columns (variables) there are - in this case a 126 x 12. We can start adding some more analysis now.
 
-## Filtering and renaming for speed
+### Filtering and renaming for speed
 You may notice when we printed the data frame that some of the column names have backticks around them. That's because they've got a space between the words and R is trying to help out. So, if we wanted to work with our Crime ID column we'd actually have to type ``Crime ID`` with the back ticks. 
 
 I'm too lazy for things like that. I'd rather change the name so I can write something easier. We're going to use `rename()` to do it. We will tell `rename()` that our `"new column name" = "old column name"`  - but make sure you put the quote marks around the names when you do this.
@@ -105,7 +109,7 @@ bikes <- crimes %>%
   filter(Crimes == "Bicycle theft") 
 ```
 
-## Doing a pivot table in dplyr syntax
+### Doing a pivot table in dplyr syntax
 Now we can do some digging. I want to know what the police have done about the reported bike thefts.
 
 We can group things together by our Outcome category and count how often each of the outcomes happen. So, we tell `group_by()` which column we want to work on. **And then** we tell it what to count - in this case it creates a column called outcome_count and uses the `n()` function to count the Outcome.
@@ -124,7 +128,7 @@ bikes
 
 We've got a pivot table - it has grouped the **Outcome column** and counted how often each one occurs.
 
-## TLDR: "Investigation complete; no suspect identified" = "No suspect identified"
+## TLDR: horrible description names are horrible
 We're going to change an element by using the `mutate()` function - we're going to `recode()` one of our Outcome categories to shorten it. The code would look like this - `mutate(Outcome = recode(Outcome, "Investigation complete; no suspect identified" = "No suspect identified"))`
 
 But I'd like to order it in descending order - so we can do one more **and then** `%>%` at the end of our code. We will `arrange()` our **outcome_count** in `desc()` - descending order. You must put `desc()` inside the `arrange()` function. And check your brackets.
@@ -144,3 +148,7 @@ bikes
 ```
 
 And we've got it. A pivot table that tells us what has happened to the bike crimes in the original data set and has put them in descending order.
+
+
+
+[^1]: The text we want back has to be surrounded in quote marks `""` as we are looking at text, or a string as it is more properly known. Find out about [string manipulation from the R for Data Science book](https://r4ds.had.co.nz/strings.html).
