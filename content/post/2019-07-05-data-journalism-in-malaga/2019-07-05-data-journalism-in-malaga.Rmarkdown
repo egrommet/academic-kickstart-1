@@ -14,7 +14,7 @@ subtitle: ''
 summary: ''
 authors: []
 lastmod: '2020-04-15T14:01:20+01:00'
-featured: no
+featured: yes
 image:
   caption: ''
   focal_point: ''
@@ -22,7 +22,7 @@ image:
 projects: []
 ---
 
+<img src="/2019-07-05-data-journalism-in-malaga/2019-07-05-data-journalism-in-malaga_files/featured.jpg" alt="Malaga" width="80%"/>
 
-
-
+## A video of the conference
 <p><a href="http://www.youtube.com/watch?v=WAls1xTwFS0" title="European Data and Computational Journalism Conference, Malaga"><img src="http://img.youtube.com/vi/WAls1xTwFS0/0.jpg" alt="European Data and Computational Journalism Conference, Malaga" /></a></p>
