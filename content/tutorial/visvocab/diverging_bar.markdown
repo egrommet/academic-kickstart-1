@@ -41,7 +41,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ─────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+## ── Attaching packages ─────────────────────────────────────────────── tidyverse 1.3.0 ──
 ```
 
 ```
@@ -52,7 +52,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 ```
@@ -121,7 +121,7 @@ So, we'll take the data set we want to work with and set the aes() like this:
 * the fill line (life_change > 0) will set the data into two groups - above and below 0
 
 
-We'll also add coord_fip() to change it from a horizontal to a vertical chart.
+We'll also add coord_flip() to change it from a horizontal to a vertical chart.
 
 
 ```r
@@ -131,7 +131,7 @@ ggplot(data = gapminder_africa,
   coord_flip()
 ```
 
-<img src="/tutorial/visvocab/diverging_bar_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="/tutorial/visvocab/diverging_bar_files/figure-html/unnamed-chunk-5-1.png" width="960" />
 
 ### Mutating the data
 In the second version I'm going to create a column that contains the information about the changes using mutate().
@@ -155,7 +155,8 @@ ggplot(data = gapminder_africa2,
   guides(fill = FALSE) +
   theme(panel.border = element_blank(),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())
+        panel.grid.minor = element_blank()) +
+  theme(axis.text.x = element_text(hjust = 6))
 ```
 
-<img src="/tutorial/visvocab/diverging_bar_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="/tutorial/visvocab/diverging_bar_files/figure-html/unnamed-chunk-6-1.png" width="960" />

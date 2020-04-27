@@ -77,9 +77,9 @@ So, we'll take the data set we want to work with and set the aes() like this:
 * the fill line (life_change > 0) will set the data into two groups - above and below 0
 
 
-We'll also add coord_fip() to change it from a horizontal to a vertical chart.
+We'll also add coord_flip() to change it from a horizontal to a vertical chart.
 
-```{r}
+```{r, fig.width=10,fig.height=11}
 ggplot(data = gapminder_africa,
        aes(x = reorder(country, life_change), y = life_change, fill = life_change > 0))+
   geom_bar(stat = "identity") +
@@ -92,7 +92,7 @@ This means the aes() can be filled by the life_change_pos column we'll create. T
 
 I've also added a few more stylistic points to make it look nicer. Have a look at the section after coord_flip() to see what is going on.
 
-```{r}
+```{r, fig.width=10,fig.height=11}
 gapminder_africa2 <- gapminder_africa %>%
   mutate(life_change_pos = life_change > 0)
 
@@ -107,5 +107,6 @@ ggplot(data = gapminder_africa2,
   guides(fill = FALSE) +
   theme(panel.border = element_blank(),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())
+        panel.grid.minor = element_blank()) +
+  theme(axis.text.x = element_text(hjust = 6))
 ```
