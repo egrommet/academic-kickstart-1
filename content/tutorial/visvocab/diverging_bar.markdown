@@ -1,6 +1,6 @@
 ---
 date: "2020-04-27T00:00:00Z"
-draft: true
+draft: false
 linktitle: Diverging Bar
 menu:
   visvocab:
