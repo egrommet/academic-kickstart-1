@@ -15,7 +15,7 @@ weight: 1
 ---
 
 
-A few years back the team at the Financial Times created the Visual Vocabulary tool ([download from Github](https://github.com/ft-interactive/chart-doctor/raw/master/visual-vocabulary/Visual-vocabulary.pdf)) - a typology inspired by the [Graphic Continuum](http://policyviz.com/graphic-continuum/). 
+A few years back the team at the Financial Times created the Visual Vocabulary tool, [download from Github](https://github.com/ft-interactive/chart-doctor/raw/master/visual-vocabulary/Visual-vocabulary.pdf) - a typology inspired by the [Graphic Continuum](http://policyviz.com/graphic-continuum/). 
 
 I've been using different tools for a while with my students, but I now start with them with the Visual Vocabulary as it is simple but really useful to help understand how to communicate with the right type of chart or visual.
 

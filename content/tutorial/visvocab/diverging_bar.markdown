@@ -11,6 +11,8 @@ toc: true
 type: docs
 weight: 1
 ---
+
+
 ## What does the Visual Vocabulary say?
 Deviation - 
 >"Emphasise variations (+/-) from a fixed reference point. Typically the reference point is zero but it can also be a target or a long-term average. Can also be used to show sentiment (positive/neutral/negative).
@@ -41,7 +43,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ─────────────────────────────────────────────── tidyverse 1.3.0 ──
+## ── Attaching packages ────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
 ```
 
 ```
@@ -52,7 +54,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 ```
@@ -111,7 +113,7 @@ ggplot(data = gapminder_africa,
   geom_bar(stat = "identity")
 ```
 
-<img src="/tutorial/visvocab/diverging_bar_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="/tutorial/visvocab/diverging_bar_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 It has done what we wanted, but the order is set by the x axis, not what we want. Also, the x axis looks a mess - lots of names that are running into one another.
 
@@ -131,7 +133,7 @@ ggplot(data = gapminder_africa,
   coord_flip()
 ```
 
-<img src="/tutorial/visvocab/diverging_bar_files/figure-html/unnamed-chunk-5-1.png" width="960" />
+<img src="/tutorial/visvocab/diverging_bar_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 ### Mutating the data
 In the second version I'm going to create a column that contains the information about the changes using mutate().
@@ -155,8 +157,7 @@ ggplot(data = gapminder_africa2,
   guides(fill = FALSE) +
   theme(panel.border = element_blank(),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()) +
-  theme(axis.text.x = element_text(hjust = 6))
+        panel.grid.minor = element_blank()) 
 ```
 
-<img src="/tutorial/visvocab/diverging_bar_files/figure-html/unnamed-chunk-6-1.png" width="960" />
+<img src="/tutorial/visvocab/diverging_bar_files/figure-html/unnamed-chunk-7-1.png" width="672" />
